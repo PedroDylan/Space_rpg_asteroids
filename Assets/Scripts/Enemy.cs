@@ -6,13 +6,18 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
+    private int points = 20;
 
     public HealthBar healthBar;
+    public GameManager manager;
 
     private void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        manager =  FindObjectOfType<GameManager>();
+
     }
 
     public void TakeDamage(int damage)
@@ -28,5 +33,6 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        manager.AddPoints(points);
     }
 }
