@@ -20,14 +20,12 @@ public class PlayerMove : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         //lendo posição do mouse na tela e convertendo para ingame logic
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
     }
 
     //lidando com a física
     private void FixedUpdate()
     {
-        //movendo na tela 2d
-        rigidbody2D.MovePosition(rigidbody2D.position + moveSPD * Time.fixedDeltaTime * movement);
+        rigidbody2D.AddForce(moveSPD * movement);
 
         //calculando o vetor de mira
         Vector2 lookdir = mousePos - rigidbody2D.position;
