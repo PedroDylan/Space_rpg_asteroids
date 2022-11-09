@@ -23,8 +23,6 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-
-        
     }
 
     private void Die()
