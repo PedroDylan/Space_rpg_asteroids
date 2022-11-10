@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,9 +8,12 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     private int points = 20;
+    private float probability;
+    public float treshold;
 
     public HealthBar healthBar;
     public GameManager manager;
+    public GameObject PowerPrefab;
 
     private void Start()
     {
@@ -17,6 +21,8 @@ public class Enemy : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
 
         manager =  FindObjectOfType<GameManager>();
+
+        probability = Random.Range(0f, 1f);
 
     }
 
@@ -34,5 +40,10 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         manager.AddPoints(points);
+
+        if(probability <= treshold)
+        {
+            Instantiate(PowerPrefab,new Vector3(gameObject.transform.position.x,gameObject.transform.position.y,0),Quaternion.identity);
+        }
     }
 }

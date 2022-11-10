@@ -22,7 +22,11 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(damage);
         }
 
-        Destroy(gameObject);
+        if (!collision.collider.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     private void Start()
